@@ -40,6 +40,8 @@ class User < ApplicationRecord
       @user = User.where("name LIKE ?", "%#{words}")
     end
   end
+  
+
 
   attachment :profile_image, destroy: false
 

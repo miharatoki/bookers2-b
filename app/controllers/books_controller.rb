@@ -11,6 +11,18 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     @books = Book.all
+    @today_book = @books.created_today
+    @yesterday_book = @books.created_yesterday
+    @this_week_book = @books.created_this_week
+    @last_week_book = @books.created_last_week
+
+    graph = []
+    for num in 0..6 do
+      days_book = @this_week_book.where(created_at: num.day.ago.beginning_of_day..num.day.ago.end_of_day).count
+      graph.unshift(days_book)
+    end
+    @graph_data = graph
+    gon.graph_data = @graph_data
   end
 
   def create

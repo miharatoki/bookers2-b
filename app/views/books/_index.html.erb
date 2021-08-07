@@ -28,3 +28,31 @@
     <% end %>
   </tbody>
 </table>
+<h2>7日間分の投稿数</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>6日前</th>
+      <th>5日前</th>
+      <th>4日前</th>
+      <th>3日前</th>
+      <th>2日前</th>
+      <th>1日前</th>
+      <th>今日</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% days = 6 %>
+      <% while days != -1 do %>
+      <td>
+        <%=@this_week_book.where(created_at: days.day.ago.beginning_of_day..days.day.ago.end_of_day).count %>
+        <% days -= 1 %>
+      </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+<p class="text-center">7日間の投稿数の比較</p>
+<canvas id="myChart" width="500" height=""></canvas>
+<script>draw_graph();</script>
